@@ -1,31 +1,17 @@
-name: deploy
-
-on:
-  push:
-    branches: [master] # master 分支有 push 时触发
-
+name: GitHub Actions Demo
+on: [push]
 jobs:
-  deploy:
+  Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Setup Node.js v14.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: '14.x'
-
-      - name: Install
-        run: npm install # 安装依赖
-
-      - name: Build
-        run: npm run build # 打包
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3 # 使用部署到 GitHub pages 的 action
-        with:
-          publish_dir: ./dist # 部署打包后的 dist 目录
-          github_token: ${{ secrets.VUE3_DEPLOY }} # secret 名
-          user_name: ${{ secrets.MY_USER_NAME }}
-          user_email: ${{ secrets.MY_USER_EMAIL }}
-          commit_message: Update Vite2.x + Vue3.x + TypeScript # 部署时的 git 提交信息，自由填写
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - run: echo "🍏 This job's status is ${{ job.status }}."
